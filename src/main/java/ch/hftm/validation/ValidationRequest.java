@@ -1,3 +1,3 @@
 package ch.hftm.validation;
 
-public record ValidationRequest(long id, String text) {}
+public record ValidationRequest(long id, String title, String content) {}

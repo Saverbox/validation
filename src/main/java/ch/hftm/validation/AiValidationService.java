@@ -11,7 +11,7 @@ public interface AiValidationService {
 
     @SystemMessage("You are an AI trained to analyze text for sensitive content.")
     @UserMessage("""
-        Analyze the following text: '{text}'. 
+        Analyze the following text:
         Determine if it is appropriate considering sexual, hateful, or other prohibited content. 
 
         For example:
@@ -20,13 +20,17 @@ public interface AiValidationService {
         - "I hate to work so hard" should be evaluated as 'APPROPRIATE'
 
         Respond with a JSON document containing:
-        - the 'text' key set to the original text
-        - the 'evaluation' key set to 'APPROPRIATE' if the text is deemed acceptable, 'INAPPROPRIATE' otherwise
+        - the 'id' key set to the original key.
+        - the 'title' key set to the original title.
+        - the 'evaluation' key set to 'APPROPRIATE' if the text is deemed acceptable, 'INAPPROPRIATE' otherwise.
+        - if 'INAPPROPRIATE', include a 'reasons' key listing specific attributes like 'sexual content', 'hate speech', 'discriminatory remarks', 'explicit violence', 'profanity'.    
 
         ---
         Original Key: {id}
-        Text to Analyze: {text}
+        Text to Analyze:
+        Blog Title: {title}
+        Content: {content}
         ---
         """)
-    String analyzeText(long id, String text);
+    AiAnalyseResult analyzeText(long id, String title, String content);
 }
