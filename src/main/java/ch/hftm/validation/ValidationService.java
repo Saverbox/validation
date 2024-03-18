@@ -42,7 +42,7 @@ public class ValidationService {
 
     private void sendValidationResponse(AiAnalyseResult result) {
         boolean valid = result.evaluation().equals("APPROPRIATE");
-        ValidationResponse response = new ValidationResponse(result.id(), valid);
+        ValidationResponse response = new ValidationResponse(result.id(), valid, result.reasons());
         validationResponseEmitter.send(response);
     }
 
